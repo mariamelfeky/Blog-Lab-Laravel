@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+Route::resource('users', 'UserController',['only'=>['edit','update']]);
+Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('phones', 'PhoneController');
+// ->middleware('auth')
