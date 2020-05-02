@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Phone;
 use Auth;
-
-
+use Validator;
+use App\Http\Requests\PhoneRequest;
 class PhoneController extends Controller
 {
     /**
@@ -35,12 +36,12 @@ class PhoneController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PhoneRequest $request)
     {
         //validation
-        $this->validate($request, [
-            'phone' => 'required|numeric|unique:phones|size:11|',
-        ]);
+        // $this->validate($request, [
+        //     'phone' => 'required|numeric|unique:phones|regex:/(01)[0-2]{1}[0-9]{8}/',
+        // ]);
 
 
         // dd(Auth::user());
@@ -84,7 +85,17 @@ class PhoneController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // $user = Auth::user();
         $phone = Phone::find($id);
+        $this->validate($request, [
+            'phone' => ['required','numeric','digits:11',
+            'regex:/(01)[0-2]{1}[0-9]{8}/',
+            Rule::unique('phones')->ignore($phone->id),
+            
+        ]
+        ]);
+
+        
         $phone->phone = $request->phone;
         $phone->user_id = Auth::id();
         $phone->save();
@@ -101,6 +112,14 @@ class PhoneController extends Controller
     public function destroy($id)
     {
         $phone = Phone::find($id);
+        // $this->validate($request, [
+        //     'phone' => ['required','numeric',
+        //     'regex:/(01)[0-2]{1}[0-9]{8}/',
+        //     Rule::unique('phones')->where(function ($query) {
+        //         $query->whereNull('deleted_at');
+        //     }),    
+        // ]
+        // ]);
         $phone->delete();
         return redirect()->route('home');
     }
