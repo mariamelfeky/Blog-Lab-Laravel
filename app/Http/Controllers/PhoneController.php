@@ -45,7 +45,7 @@ class PhoneController extends Controller
 
 
         // dd(Auth::user());
-        dd($request);
+        // dd($request);
         $phone = new Phone;
         $phone->phone = $request->phone;
         $phone->user_id = Auth::id();
@@ -85,7 +85,7 @@ class PhoneController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('update','App\Phone');
+        // $this->authorize('update','App\Phone');
         $phone = Phone::find($id);
         $this->validate($request, [
             'phone' => ['required','numeric','digits:11',
