@@ -15,8 +15,14 @@
             </div>
             <br>
             <h3>Your address</h3>
-                <h4>{{ $user->address}}</h4> <a href="{{route('users.edit',$user)}}" class="btn btn-success">Update</a>
-                     
+                
+            <h4>{{ $user->address}} <a href="{{route('users.edit',$user)}}" class="btn btn-success" style="margin-left:9cm">Update</a></h4> 
+            <br/>
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{Session::get('success')}}
+                </div>     
+                @endif
             <table class="table">
                 <thead>
                     <tr>
@@ -35,9 +41,6 @@
                         {!! Form::close() !!}
                     </td>
                     </tr>
-            {{-- <div class="card-body ">
-            <div class="card-title">{{$phone->phone}}</div>
-            </div> --}}
             @empty
                 <div class="alert alert-info"> No phones yet..!!</div>
             @endforelse 

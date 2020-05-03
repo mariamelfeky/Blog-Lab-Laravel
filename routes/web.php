@@ -19,4 +19,5 @@ Auth::routes();
 Route::resource('users', 'UserController',['only'=>['edit','update']]);
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('phones', 'PhoneController');
+Route::resource('contacts', 'ContactController');
 // ->middleware('auth')

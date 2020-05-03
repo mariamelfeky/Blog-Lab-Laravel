@@ -28,7 +28,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ url('/home') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
@@ -37,9 +37,16 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
+                        <li>
                         <a class="navbar-brand" href="{{ route('phones.create')}}">
-                            new phone
+                            add phone
                         </a>
+                    </li>
+                    <li>
+                        <a class="navbar-brand" href="{{ route('contacts.index')}}">
+                            Contacts
+                        </a>
+                    </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

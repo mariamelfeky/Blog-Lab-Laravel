@@ -45,13 +45,13 @@ class PhoneController extends Controller
 
 
         // dd(Auth::user());
-        // dd($request->phone;
+        dd($request);
         $phone = new Phone;
         $phone->phone = $request->phone;
         $phone->user_id = Auth::id();
         $phone->save();
 
-        return redirect()->route('home');
+        return redirect()->route('home')->with('success','Phone has been added successfully');
     }
 
     /**
